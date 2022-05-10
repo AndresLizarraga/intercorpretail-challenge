@@ -24,30 +24,36 @@ public class Cliente {
 	private Date fechaNacimiento;
 	
 	private Cliente() {}
-	
-	public String getName() {
+
+	public String getNombre() {
 		return nombre;
 	}
-	public void setName(String name) {
-		this.nombre = name;
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public String getLastName() {
+
+	public String getApellido() {
 		return apellido;
 	}
-	public void setLastName(String lastName) {
-		this.apellido = lastName;
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
-	public int getAge() {
+
+	public int getEdad() {
 		return edad;
 	}
-	public void setAge(int age) {
-		this.edad = age;
+
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
-	public Date getBirthday() {
+
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	public void setBirthday(Date birthday) {
-		this.fechaNacimiento = birthday;
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
-	
 }
