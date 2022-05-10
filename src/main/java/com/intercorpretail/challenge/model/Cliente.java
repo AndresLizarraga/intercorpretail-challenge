@@ -23,6 +23,9 @@ public class Cliente {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date fechaNacimiento;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date fechaProbableMuerte;
+	
 	private Cliente() {}
 
 	public String getNombre() {
@@ -56,4 +59,13 @@ public class Cliente {
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+
+	public Date getFechaProbableMuerte() {
+		return fechaProbableMuerte;
+	}
+
+	public void setFechaProbableMuerte(Date fechaProbableMuerte) {
+		this.fechaProbableMuerte = fechaProbableMuerte;
+	}
+	
 }
