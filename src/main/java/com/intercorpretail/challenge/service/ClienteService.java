@@ -6,8 +6,10 @@ import com.intercorpretail.challenge.model.Cliente;
 
 public interface ClienteService {
 
-	int calcularEdadPromedio(List<Cliente> clients);
+	float calcularEdadPromedio(List<Cliente> clientes);
 	
-	int calcularDesviacionEstandarEdades(List<Cliente> clients);
+	double calcularDesviacionEstandarEdades(List<Cliente> clientes);
+	
+	int sumarEdadesClientes(List<Cliente> clientes);
 	
 }
