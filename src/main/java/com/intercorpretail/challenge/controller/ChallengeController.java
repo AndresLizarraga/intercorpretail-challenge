@@ -47,23 +47,23 @@ public class ChallengeController {
 				obj.addProperty("Status: ", 1);
 				obj.addProperty("Mensaje : ", "Ocurrio un error al crear un nuevo objeto cliente. Por favor revisar los datos ingresados en el body de la solicitud.");
 				obj.addProperty("Error: ", e.toString());
-				return ResponseEntity.badRequest().body(obj.toString());
+				return ResponseEntity.badRequest().body(obj);
 			}
 		      catch (NullPointerException e) {
 					e.printStackTrace();
 					obj.addProperty("Status: ", 1);
 					obj.addProperty("Mensaje : ", "Ocurrio un error al crear un nuevo objeto cliente. Alguno de los campos del body tiene un dato null.");
 					obj.addProperty("Error: ", e.toString());
-					return ResponseEntity.badRequest().body(obj.toString());
+					return ResponseEntity.badRequest().body(obj);
 		      } 
 			  catch (Exception e) {
 					e.printStackTrace();
 					obj.addProperty("Status: ", 1);
 					obj.addProperty("Mensaje : ", "Ocurrio un error al crear un nuevo objeto cliente.");
 					obj.addProperty("Error: ", e.toString());
-					return ResponseEntity.badRequest().body(obj.toString());
+					return ResponseEntity.badRequest().body(obj);
 			  }
-		return ResponseEntity.ok().body(obj.toString());
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	/**
@@ -93,15 +93,15 @@ public class ChallengeController {
 			obj.addProperty("Status: ", 1);
 			obj.addProperty("Mensaje : ", "Ocurrio un error al consultar la base de datos. No se encontraron registros.");
 			obj.addProperty("Error: ", e.toString());
-			return ResponseEntity.badRequest().body(obj.toString());
+			return ResponseEntity.badRequest().body(obj);
 		} catch (ArithmeticException e) {
 			e.printStackTrace();
 			obj.addProperty("Status: ", 1);
 			obj.addProperty("Mensaje : ", "Ocurrio un error al realizar los calculos de la desviacion estandar.");
 			obj.addProperty("Error: ", e.toString());
-			return ResponseEntity.badRequest().body(obj.toString());
+			return ResponseEntity.badRequest().body(obj);
 		}
-		return ResponseEntity.ok().body(obj.toString());
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	/**s
@@ -115,7 +115,7 @@ public class ChallengeController {
 		try {
 		List<Cliente> clientes = (List<Cliente>) daoCliente.findAll();
 		  if (clientes != null && !clientes.isEmpty()) {
-				return ResponseEntity.ok().body(clientes.toString());
+				return ResponseEntity.ok().body(clientes);
 		  } else {
 			  throw new EntityNotFoundException();
 		  }
@@ -124,7 +124,7 @@ public class ChallengeController {
 			obj.addProperty("Status: ", 1);
 			obj.addProperty("Mensaje : ", "Ocurrio un error al consultar la base de datos. No se encontraron registros.");
 			obj.addProperty("Error: ", e.toString());
-			return ResponseEntity.badRequest().body(obj.toString());
+			return ResponseEntity.badRequest().body(obj);
 		}
 	}
 }
