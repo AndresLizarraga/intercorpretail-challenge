@@ -24,11 +24,11 @@ Capa que contiene toda la lógica del controlador en donde se implementan y gest
     "edad": "30"
     }
 ```        
-- En donde los campos: 
-       -"nombre" : Es el nombre del cliente a persistir. Este campo es de tipo de dato String. Este campo no puede ser null.
-	   -"apellido" : Es el apellido del cliente a persistir. Este campo es de tipo de dato String. Este campo no puede ser null.
-	   -"fechaNacimiento" : Es la fecha de nacimiento del cliente a persistir. Este campo es de tipo de dato Date. Es excluyente que este campo de tipo de fecha sea enviado usando el formato "yyyy-MM-dd". Este campo no puede ser null.
-	   -"edad": Es la edad del cliente a persistir. Este campo es de tipo de dato Integer. Es excluyente que este campo de tipo Integer sea enviado usando los formatos de ejemplo: "30" o 30. Este campo no puede ser null.
+- En donde los campos:  
+       -"nombre" : Es el nombre del cliente a persistir. Este campo es de tipo de dato String. Este campo no puede ser null.  
+	   -"apellido" : Es el apellido del cliente a persistir. Este campo es de tipo de dato String. Este campo no puede ser null.  
+	   -"fechaNacimiento" : Es la fecha de nacimiento del cliente a persistir. Este campo es de tipo de dato Date. Es excluyente que este campo de tipo de fecha sea enviado usando el formato "yyyy-MM-dd". Este campo no puede ser null.  
+	   -"edad": Es la edad del cliente a persistir. Este campo es de tipo de dato Integer. Es excluyente que este campo de tipo Integer sea enviado usando los formatos de ejemplo: "30" o 30. Este campo no puede ser null.  
 	   
    De ejecutarse la solicitud de manera correcta, endpoint responde con un objeto json con el siguiente formato: 
 ```sh
@@ -71,15 +71,15 @@ Capa que contiene toda la lógica del controlador en donde se implementan y gest
 Capa que contiene las clases de configuracion necesaria para la implementación de SWAGGER. 
 
 ##### package com.intercorpretail.challenge.model
-Capa que contiene la definición de la entidad 'Cliente' la cual representa al objeto del negocio cliente.
-Clase 'Cliente'
- Representa la entidad 'Cliente'. Dicha entidad esta conformada por los campos:
-nombre: Representa el nombre del cliente. Este campo es de tipo de dato String. Este campo no puede ser null.
-apellido: Representa el apellido del cliente. Este campo es de tipo de dato String. Este campo no puede ser null.
-edad: Representa la edad del cliente. Este campo es de tipo Integer. Este campo no puede ser null.
-fechaNacimiento: Representa la edad del cliente. Este campo tipo de dato es Date. Este campo no puede ser null y únicamente admite el formato: "yyyy-MM-dd".
-fechaProbableMuerte: Representa la edad probable de muerte del cliente. Este valor es calculado tomando como referencia la edad de mortalidad de Peru al 2021 y se toma en cuenta la fecha de nacimiento del cliente.
-esperanzaVidaPeru: este campo es de tipo de dato int, es una variable estatica que representa la edad de mortalidad promedio de Peru al 2021.
+Capa que contiene la definición de la entidad 'Cliente' la cual representa al objeto del negocio cliente.  
+Clase 'Cliente'  
+ Representa la entidad 'Cliente'. Dicha entidad esta conformada por los campos:  
+nombre: Representa el nombre del cliente. Este campo es de tipo de dato String. Este campo no puede ser null.  
+apellido: Representa el apellido del cliente. Este campo es de tipo de dato String. Este campo no puede ser null.  
+edad: Representa la edad del cliente. Este campo es de tipo Integer. Este campo no puede ser null.  
+fechaNacimiento: Representa la edad del cliente. Este campo tipo de dato es Date. Este campo no puede ser null y únicamente admite el formato: "yyyy-MM-dd".  
+fechaProbableMuerte: Representa la edad probable de muerte del cliente. Este valor es calculado tomando como referencia la edad de mortalidad de Peru al 2021 y se toma en cuenta la fecha de nacimiento del cliente.  
+esperanzaVidaPeru: este campo es de tipo de dato int, es una variable estatica que representa la edad de mortalidad promedio de Peru al 2021.  
 
 Clase 'ApiResponse' 
   Representa un objeto que mapea la respuesa del endpoint '/creaCliente'. 
@@ -103,7 +103,7 @@ Capa que contiene la interfaz que representa el servicio que realizara las difer
 Capa que contiene la implementación de la interfaz que representa el servicio que realizara las diferentes operaciones con la entidad 'Cliente'.
 
 # ¿Cómo ejecutar la aplicación?
-- Si ya se descargó el proyecto y se importó a un nuevo workspace utilizando un IDE, como por ejemplo, Eclipse, solo basta con dirigirse al paquete 'package com.intercorpretail.challenge', hacer click derecho en la clase 'ChallengeApplication.java', elegir la opción 'run as' , y a continuación seleccionar 'Java Application'.
+- Si ya se descargó el proyecto y se importó a un nuevo workspace utilizando un IDE, como por ejemplo, Eclipse, solo basta con dirigirse al paquete 'com.intercorpretail.challenge', hacer click derecho en la clase 'ChallengeApplication.java', elegir la opción 'run as' , y a continuación seleccionar 'Java Application'.
 - Si se desea ejecutar la aplicacion desde la consola de Windows, basta con dirigirse al directorio principal donde se encuentra contenido el proyecto desde el cmd y ejecutar el comando: mvnw spring-boot:run.
 
 # ¿Con quién me comunico en caso de consultas?
