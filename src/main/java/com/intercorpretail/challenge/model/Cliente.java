@@ -96,5 +96,4 @@ public class Cliente {
 				+ new SimpleDateFormat("yyyy-MM-dd").format(this.fechaProbableMuerte) + "]";
 	}
 	
-	
 }
