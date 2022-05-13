@@ -1,15 +1,16 @@
 package com.intercorpretail.challenge.service;
 
 import java.util.List;
-
+import com.intercorpretail.challenge.model.ApiResponse;
+import com.intercorpretail.challenge.model.CalculationApiResponse;
 import com.intercorpretail.challenge.model.Cliente;
+import com.intercorpretail.challenge.model.ClientesApiResponse;
 
 public interface ClienteService {
-
-	float calcularEdadPromedio(List<Cliente> clientes) throws ArithmeticException;
 	
-	double calcularDesviacionEstandarEdades(List<Cliente> clientes) throws ArithmeticException;
+	ApiResponse crearCliente(Cliente cliente);
 	
-	int sumarEdadesClientes(List<Cliente> clientes);
+	CalculationApiResponse calcularPromediosClientes();
 	
+	List<ClientesApiResponse> listarClientes();
 }

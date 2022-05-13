@@ -3,24 +3,20 @@ package com.intercorpretail.challenge.controller;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
-import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.google.gson.JsonObject;
+import org.springframework.web.bind.annotation.RestController;
+import com.intercorpretail.challenge.model.ApiResponse;
+import com.intercorpretail.challenge.model.CalculationApiResponse;
 import com.intercorpretail.challenge.model.Cliente;
-import com.intercorpretail.challenge.repository.DaoCliente;
+import com.intercorpretail.challenge.model.ClientesApiResponse;
 import com.intercorpretail.challenge.service.ClienteService;
 
-@Controller
+@RestController 
 public class ChallengeController {
-	
-	@Autowired
-	private DaoCliente daoCliente;
 	
 	@Autowired
 	private ClienteService clienteService;
@@ -32,38 +28,11 @@ public class ChallengeController {
 	* @return el nuevo objeto 'cliente' insertado en la base de datos en formato json. **/
 	@PostMapping(path="/creaCliente")
 	private ResponseEntity<Object> crearCliente(@RequestBody Cliente cliente) {
-		JsonObject obj = new JsonObject();
-		try {
+		ApiResponse response = new ApiResponse();
 			if (cliente != null) {
-		cliente.calcularFechaProbableMuerte();
-		daoCliente.save(cliente);
-		obj.addProperty("Status: ", 0);
-		obj.addProperty("Mensaje: ", "Se creó un nuevo objeto cliente correctamente.");
-			} else {
-				throw new ConstraintViolationException("Ocurrió un error validando los datos. Por favor revisar el body de la solicitud",null);
-			}
-			} catch (TransactionSystemException e) {
-				e.printStackTrace();
-				obj.addProperty("Status: ", 1);
-				obj.addProperty("Mensaje : ", "Ocurrio un error al crear un nuevo objeto cliente. Por favor revisar los datos ingresados en el body de la solicitud.");
-				obj.addProperty("Error: ", e.toString());
-				return ResponseEntity.badRequest().body(obj);
-			}
-		      catch (NullPointerException e) {
-					e.printStackTrace();
-					obj.addProperty("Status: ", 1);
-					obj.addProperty("Mensaje : ", "Ocurrio un error al crear un nuevo objeto cliente. Alguno de los campos del body tiene un dato null.");
-					obj.addProperty("Error: ", e.toString());
-					return ResponseEntity.badRequest().body(obj);
-		      } 
-			  catch (Exception e) {
-					e.printStackTrace();
-					obj.addProperty("Status: ", 1);
-					obj.addProperty("Mensaje : ", "Ocurrio un error al crear un nuevo objeto cliente.");
-					obj.addProperty("Error: ", e.toString());
-					return ResponseEntity.badRequest().body(obj);
-			  }
-		return ResponseEntity.ok().body(obj);
+				response = clienteService.crearCliente(cliente);
+			} 
+		return ResponseEntity.ok().body(response);
 	}
 	
 	/**
@@ -74,57 +43,32 @@ public class ChallengeController {
 	* estandar entre las edades de todos los clientes. **/
 	@GetMapping(path="/kpideclientes")
 	private ResponseEntity<Object> calcularPromediosClientes() {
-		JsonObject obj = new JsonObject();
-		try {
-		List<Cliente> clientes = (List<Cliente>) daoCliente.findAll();
-		
-		if (clientes != null && !clientes.isEmpty()) {
-		double edadPromedio = clienteService.calcularEdadPromedio(clientes);
-		double desviacionEstandarEdades = clienteService.calcularDesviacionEstandarEdades(clientes);
-    	obj.addProperty("Status: ", 0);
-    	obj.addProperty("Mensaje: ","Se realizó correctamente el cálculo del promedio de edades y desviación estandar. ");
-    	obj.addProperty("promedioEdadClientes: ", edadPromedio);
-    	obj.addProperty("desviacionEstandarEdades: ", desviacionEstandarEdades); 
-		} else {
-			throw new EntityNotFoundException();
-			}
-		} catch (EntityNotFoundException e) {
-			e.printStackTrace();
-			obj.addProperty("Status: ", 1);
-			obj.addProperty("Mensaje : ", "Ocurrio un error al consultar la base de datos. No se encontraron registros.");
-			obj.addProperty("Error: ", e.toString());
-			return ResponseEntity.badRequest().body(obj);
-		} catch (ArithmeticException e) {
-			e.printStackTrace();
-			obj.addProperty("Status: ", 1);
-			obj.addProperty("Mensaje : ", "Ocurrio un error al realizar los calculos de la desviacion estandar.");
-			obj.addProperty("Error: ", e.toString());
-			return ResponseEntity.badRequest().body(obj);
-		}
-		return ResponseEntity.ok().body(obj);
+		CalculationApiResponse response = new CalculationApiResponse();
+		response = clienteService.calcularPromediosClientes();
+		 return ResponseEntity.ok().body(response);
 	}
 	
-	/**s
+	/**
 	* @author AndresLizarraga
 	* GET API que retorna una lista con todos los objetos de tipo 'Cliente' de la base de datos 
 	* y la edad probable de muerte de cada uno.   
 	* @return una lista con todos los clientes de la base de datos y la fecha probable de muerte de cada uno. **/
 	@GetMapping(path="/listclientes")
 	private ResponseEntity<Object> listarClientes() {
-		JsonObject obj = new JsonObject();
+		ApiResponse response = new ApiResponse();
 		try {
-		List<Cliente> clientes = (List<Cliente>) daoCliente.findAll();
-		  if (clientes != null && !clientes.isEmpty()) {
-				return ResponseEntity.ok().body(clientes);
+		List<ClientesApiResponse> clientesResponse = clienteService.listarClientes();
+		  if (clientesResponse != null && !clientesResponse.isEmpty()) {
+				return ResponseEntity.ok().body(clientesResponse);
 		  } else {
 			  throw new EntityNotFoundException();
 		  }
 		} catch (EntityNotFoundException e) { 
 			e.printStackTrace();
-			obj.addProperty("Status: ", 1);
-			obj.addProperty("Mensaje : ", "Ocurrio un error al consultar la base de datos. No se encontraron registros.");
-			obj.addProperty("Error: ", e.toString());
-			return ResponseEntity.badRequest().body(obj);
+			response.setStatus("ERROR");
+			response.setMensaje("Ocurrio un error al consultar la base de datos. No se encontraron registros.");
+			response.setError("1");
+			return ResponseEntity.badRequest().body(response);
 		}
 	}
 }
